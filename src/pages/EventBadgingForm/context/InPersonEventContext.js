@@ -1,13 +1,17 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from "prop-types";
 
-export const InPersonEventContext = createContext();
+export const InPersonEventContext = createContext({});
 
 
 export const InPersonEventProvider = ({ children }) => {
     const [formData, setFormData] = useState({
-        step: 1,
+        step: 2,
     });
+
+    const updateFormData = (newData) => {
+        setFormData({ ...formData, ...newData });
+    }
 
     const nextStep = () => {
         setFormData((prevData) => ({
@@ -24,7 +28,7 @@ export const InPersonEventProvider = ({ children }) => {
     }
 
     return (
-        <InPersonEventContext.Provider value={{ formData, setFormData, nextStep, prevStep }}>
+        <InPersonEventContext.Provider value={{ formData, setFormData, updateFormData, nextStep, prevStep }}>
             {children}
         </InPersonEventContext.Provider>
     )

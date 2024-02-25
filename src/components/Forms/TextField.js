@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import './TextField.scss';
+import { Field } from 'formik';
 
 const TextField = ({
   type,
@@ -34,7 +35,7 @@ const TextField = ({
               ${error ? 'error__border' : 'border'}`,
         ].join(' ')}
       >
-        <input
+        <Field
           type={type || 'text'}
           className={[
             inputClass,

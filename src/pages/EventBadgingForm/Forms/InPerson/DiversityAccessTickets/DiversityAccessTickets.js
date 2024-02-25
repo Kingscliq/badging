@@ -9,6 +9,11 @@ import arrowRight from '../../../../../assets/images/others/arrow-right.svg';
 import TextArea from '../../../../../components/TextArea/TextArea';
 
 const DiversityAccessTickets = () => {
+    const { formData, setFormData, nextStep, prevStep } = useContext(InPersonEventContext);
+
+    const handlePrevBtn = () => {
+        prevStep();
+    }
     return (
         <div className='container'>
             <div className='in-person-form'>
@@ -37,7 +42,7 @@ const DiversityAccessTickets = () => {
                         </div>
                     </div>
 
-                    <div className='physical-input'>                     
+                    <div className='physical-input'>
                         <TextArea
                             label="How many different types of diversity access tickets are available for the event?"
                             rows={6}
@@ -46,7 +51,7 @@ const DiversityAccessTickets = () => {
                         />
                     </div>
 
-                    <div className='physical-input'>                    
+                    <div className='physical-input'>
                         <TextArea
                             label="What are the criteria for qualifying for a diversity access ticket?"
                             rows={6}
@@ -89,7 +94,7 @@ const DiversityAccessTickets = () => {
                     </div>
 
                     <div className='btn-group'>
-                        <Button className="btn-primary btn-next" >
+                        <Button type="button" className="btn-primary btn-next" >
                             Previous
                         </Button>
 

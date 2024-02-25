@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Footer, Header } from '../../components';
 import '../EventBadging/event-badging.scss';
 import './EventBadgingForm.scss';
@@ -13,25 +13,38 @@ import FamilyFriendliness from './Forms/InPerson/FamilyFriendliness/FamilyFriend
 import EventDemographics from './Forms/InPerson/EventDemographics/EventDemographics';
 import InclusiveExperience from './Forms/InPerson/InclusiveExperience/InclusiveExperience';
 import { InPersonEventContext, InPersonEventProvider } from './context/InPersonEventContext';
+import SwitchComponents from './components/SwitchComponents';
 
 
 const EventBadgingForm = () => {
-  const { formData, setFormData } = useContext(InPersonEventContext);
-  console.log("yes", formData);
+  
   const [swap, setSwap] = useState('in-person');
   const swapHandler = toggle => {
     setSwap(toggle);
   };
 
+
+  const switchComponents = (num) => {
+    switch (num) {
+      case 1:
+        return <BasicInfo />;
+      case 2:
+        return <EventDemographics />
+      default:
+        break;
+    }
+  }
+
   const route = {
-    'in-person': <BasicInfo />,
+    // 'in-person': switchComponents(2),
+    'in-person': <SwitchComponents />,
     // 'in-person': <InclusiveExperience />,
     virtual: <Virtual />,
   };
 
   return (
     <>
-      <InPersonEventProvider value={{formData}}>
+      <InPersonEventProvider>
         <main>
           <div className="overlay">
             <div className="bgRight"></div>
@@ -60,7 +73,6 @@ const EventBadgingForm = () => {
           </div>
           <section className="event-form-container">
             {route[swap]}
-
           </section>
         </main>
         <Footer />
